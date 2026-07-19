@@ -26,6 +26,7 @@ const signUp = async (req, res) => {
 
     const userData = {
         username: req.body.username,
+        email: req.body.email,
         password: hashedPassword,
     };
 
