@@ -98,6 +98,10 @@ const showAdmin = async(req,res) => {
     })
 }
 
+const updateUser = async (req, res) => {
+    
+}
+
 
 module.exports = {
     home,

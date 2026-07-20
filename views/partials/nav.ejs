@@ -25,9 +25,12 @@
                         Sign Out
                     </button>
                 </form>
-            <% } else { %>
+            <% } else  { %>
                 <a class="site-nav-link" href="/auth/sign-up">Sign Up</a>
                 <a class="site-nav-link" href="/auth/sign-in">Sign In</a>
+            <% } %>
+            <% if (user && user.role === 'admin') { %>
+                <a  href="/admin">Admin Page</a>
             <% } %>
         </div>
     </nav>
