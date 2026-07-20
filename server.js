@@ -8,7 +8,7 @@ require("dotenv").config();
 
 const authCtrl = require("./controllers/auth.js");
 const isSignedIn = require("./middleware/is-signed-in.js");
-const isReviewer = require('./middleware/is-reviewer.js')
+const isAdmin = require('./middleware/is-admin.js')
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const methodOverride = require("method-override");
 const { MongoStore } = require("connect-mongo");
@@ -38,15 +38,17 @@ app.use(
         }),
     })
 );
-
 app.use(passUserToView);
-app.get('/admin',isSignedIn,isReviewer,)
+
+
+app.get('/admin',isSignedIn,isAdmin,authCtrl.showAdmin)
 app.get("/", authCtrl.home);
 app.get("/auth/sign-up", authCtrl.showSignUpForm);
 app.post("/auth/sign-up", authCtrl.signUp);
 app.get("/auth/sign-in", authCtrl.showSignInForm);
 app.post("/auth/sign-in", authCtrl.signIn);
 app.delete("/auth/sign-out", authCtrl.signOut);
+
 
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 

@@ -1,0 +1,28 @@
+<%- include("../partials/nav.ejs") %>
+
+<h1>Manage users</h1>
+
+<table>
+    <tr>Name</tr>
+    <tr>Email</tr>
+    <tr>Role</tr>
+    <tr>Action</tr>
+
+    <% users.forEach((item)=> { %>
+     
+        <tr>
+            <td><%= item.username %></td>
+            <td><%= item.email %></td>
+            <td><%= item.role %></td>
+            <td>
+                <form action="/admin/users/<%= item._id %>"  method='POST'>
+                    <select name="role">
+                        <option value="user">User</option>
+                        <option value="reviewer">reviewer</option>
+                    </select>
+                    <button type="submit">Update</button>
+                </form>
+            </td>
+        </tr>
+    <% }) %>
+</table>

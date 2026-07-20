@@ -69,7 +69,9 @@ const signIn = async (req, res) => {
     req.session.user = {
         username: userInDatabase.username,
         id: userInDatabase.id,
+        role: userInDatabase.role,
     };
+
 
     req.session.save(() => {
         res.redirect("/");
@@ -88,6 +90,15 @@ const dashboard = (req, res) => {
     });
 };
 
+const showAdmin = async(req,res) => {
+    console.log(req.session)
+    const users = await User.find()
+    res.render('auth/users.ejs', {
+        users,
+    })
+}
+
+
 module.exports = {
     home,
     showSignUpForm,
@@ -96,4 +107,5 @@ module.exports = {
     signIn,
     signOut,
     dashboard,
+    showAdmin,
 };
