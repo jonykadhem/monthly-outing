@@ -17,8 +17,9 @@
             <td>
                 <form action="/admin/users/<%= item._id %>"  method='POST'>
                     <select name="role">
-                        <option value="user">User</option>
-                        <option value="reviewer">reviewer</option>
+                        <option value="user"<%= item.role === 'user' ? 'selected' : '' %>>User</option>
+                        <option value="reviewer"<%= item.role === 'reviewer' ? 'selected' : '' %>>reviewer</option>
+                        <option value="admin"<%= item.role === 'admin' ? 'selected' : '' %>>Admin</option>
                     </select>
                     <button type="submit">Update</button>
                 </form>

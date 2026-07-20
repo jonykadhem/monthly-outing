@@ -99,7 +99,10 @@ const showAdmin = async(req,res) => {
 }
 
 const updateUser = async (req, res) => {
-    
+    await User.findByIdAndUpdate(req.params.id, {
+        role: req.body.role
+    })
+    res.redirect('/admin')
 }
 
 
@@ -112,4 +115,5 @@ module.exports = {
     signOut,
     dashboard,
     showAdmin,
+    updateUser,
 };
