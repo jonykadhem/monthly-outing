@@ -46,6 +46,12 @@ const deleteSuggestion = async (req,res) =>{
         res.send('you cant delete')
     }
 }
+const showEditForm = async(req, res) => {
+    let foundRestaurant = await Restaurant.findById(req.params.restaurantId).populate('owner')
+    res.render('restaurants/edit-restaurant.ejs',{
+        foundRestaurant
+    })
+}
 
 module.exports = {
     showNewRestaurantForm,
@@ -53,4 +59,5 @@ module.exports = {
     showAllSuggestions,
     showDetails,
     deleteSuggestion,
+    showEditForm,
 }
