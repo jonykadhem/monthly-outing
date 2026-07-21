@@ -6,9 +6,7 @@ dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
 require("dotenv").config();
 
-const authCtrl = require("./controllers/auth.js");
-const isSignedIn = require("./middleware/is-signed-in.js");
-const isAdmin = require('./middleware/is-admin.js')
+
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const methodOverride = require("method-override");
 const { MongoStore } = require("connect-mongo");
@@ -22,6 +20,14 @@ const path = require("path");
 const app = express();
 
 const PORT = process.env.PORT || 3000; // For me, this is best practice. Usually, the port is placed in .env; if not, 3000 will be used
+// controlerss and methods 
+const authCtrl = require("./controllers/auth.js");
+const isSignedIn = require("./middleware/is-signed-in.js");
+const isAdmin = require('./middleware/is-admin.js')
+
+const restaurantCtrl = require('./controllers/restaurant.js')
+
+
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: false }));
@@ -52,6 +58,11 @@ app.post('/admin/users/:id', authCtrl.updateUser)
 
 
 app.get("/dashboard", isSignedIn, authCtrl.dashboard);
+
+// new seggestion restaurants
+app.get('/restaurant/new',isSignedIn, restaurantCtrl.showNewRestaurantForm)
+app.post('/restaurants', isSignedIn, restaurantCtrl.creatSuggestion)
+
 
 const startServer = async () => {
     try {

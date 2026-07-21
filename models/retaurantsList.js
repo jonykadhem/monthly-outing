@@ -12,7 +12,13 @@ const restaurantsSchema = new mongoose.Schema({
     },
     instagram:{
         type: String,
-    }
+    },
+    recommendation: {
+        type: String,
+    },
+    details: {
+        type: String
+    },
     
 },{ timestamps: true });
 
