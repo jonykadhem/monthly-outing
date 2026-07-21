@@ -62,7 +62,8 @@ app.get("/dashboard", isSignedIn, authCtrl.dashboard);
 // new seggestion restaurants
 app.get('/restaurant/new',isSignedIn, restaurantCtrl.showNewRestaurantForm)
 app.post('/restaurants', isSignedIn, restaurantCtrl.creatSuggestion)
-app.get('/suggsetions', restaurantCtrl.showAllSuggestions)
+app.get('/suggestions', restaurantCtrl.showAllSuggestions)
+app.get('/restaurant/:restaurantId', restaurantCtrl.showDetails)
 
 
 const startServer = async () => {

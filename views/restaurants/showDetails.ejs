@@ -1,0 +1,14 @@
+<%- include("../partials/nav.ejs") %>
+
+<h1><%= foundRestaurant.name %></h1>
+<p><%= foundRestaurant.details %></p>
+<p><%= foundRestaurant.recommendation %></p>
+
+<a href="<%= foundRestaurant.location %>" class="btn btn-secondary">📍</a>
+<br>
+<a href="<%= foundRestaurant.instagram %>" class="btn btn-secondary">📸</a>
+<br>
+<a href="<%= "/suggestions" %>" class="btn btn-secondary">Back to All Restaurants</a>
+
+</body>
+</html>
