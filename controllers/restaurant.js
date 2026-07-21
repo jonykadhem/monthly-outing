@@ -16,7 +16,7 @@ const creatSuggestion = async(req,res) => {
 
     let creatSuggestions = await Restaurant.create(restaurantData)
 
-    res.redirect('/')
+    res.redirect('/suggsetions')
 }
 
 const showAllSuggestions = async (req, res) =>{
