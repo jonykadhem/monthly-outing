@@ -24,6 +24,11 @@ const restaurantsSchema = new mongoose.Schema({
         ref: 'User',
         required: true,
     },
+    status:{
+        type: String,
+        enum: ['suggested', 'reviewed'],
+        default: 'suggested',
+    },
     
 },{ timestamps: true });
 

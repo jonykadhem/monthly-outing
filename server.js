@@ -26,6 +26,7 @@ const isSignedIn = require("./middleware/is-signed-in.js");
 const isAdmin = require('./middleware/is-admin.js')
 
 const restaurantCtrl = require('./controllers/restaurant.js')
+const reviewCtrl = require('./controllers/reviewer.js')
 
 
 
