@@ -52,6 +52,20 @@ const showEditForm = async(req, res) => {
         foundRestaurant
     })
 }
+const editRestaurant = async (req, res) => {
+    let foundRestaurant = await Restaurant.findById(req.params.restaurantId).populate('owner')
+
+    const restaurantData = {}
+    restaurantData.name = req.body.name
+    restaurantData.location = req.body.location
+    restaurantData.instagram = req.body.instagram
+    restaurantData.recommendation = req.body.recommendation
+    restaurantData.details = req.body.details
+    restaurantData.owner = req.session.user.id
+
+    await Restaurant.findByIdAndUpdate(req.params.restaurantId, req.body)
+    res.redirect(`/restaurant/${req.params.restaurantId}`)
+}
 
 module.exports = {
     showNewRestaurantForm,
@@ -60,4 +74,5 @@ module.exports = {
     showDetails,
     deleteSuggestion,
     showEditForm,
+    editRestaurant,
 }

@@ -66,6 +66,7 @@ app.get('/suggestions', restaurantCtrl.showAllSuggestions)
 app.get('/restaurant/:restaurantId', restaurantCtrl.showDetails)
 app.delete('/restaurant/:restaurantId',isSignedIn, restaurantCtrl.deleteSuggestion)
 app.get("/restaurant/:restaurantId/edit", isSignedIn, restaurantCtrl.showEditForm)
+app.put("/restaurant/:restaurantId", isSignedIn, restaurantCtrl.editRestaurant)
 
 const startServer = async () => {
     try {

@@ -2,7 +2,7 @@
 
 <h1>Edit Restaurant</h1>
 
-<form action="/restaurants/<%= foundRestaurant._id %>?_method=PUT/edit" method="post">
+<form action="/restaurant/<%= foundRestaurant.id %>?_method=PUT" method="POST">
     <div>
 
         <label for="name">Restaurant Name: </label>
@@ -14,7 +14,7 @@
         <label for="instagram">Restaurant instagram Account: </label>
         <input type="text" name="instagram" value="<%= foundRestaurant.instagram %>">
         <br>
-        <label for="recommendation">What do you recommende to try? </label>
+        <label for="recommendation">What do you recommend to try? </label>
         <input type="text" name="recommendation" value="<%= foundRestaurant.recommendation %>">
         <br>
         <label for="details">Restaurant details: </label><br>
