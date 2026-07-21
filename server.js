@@ -64,7 +64,7 @@ app.get('/restaurant/new',isSignedIn, restaurantCtrl.showNewRestaurantForm)
 app.post('/restaurants', isSignedIn, restaurantCtrl.creatSuggestion)
 app.get('/suggestions', restaurantCtrl.showAllSuggestions)
 app.get('/restaurant/:restaurantId', restaurantCtrl.showDetails)
-
+app.delete('/restaurant/:restaurantId',isSignedIn, restaurantCtrl.deleteSuggestion)
 
 const startServer = async () => {
     try {

@@ -13,6 +13,7 @@ const creatSuggestion = async(req,res) => {
     restaurantData.instagram = req.body.instagram
     restaurantData.recommendation = req.body.recommendation
     restaurantData.details = req.body.details
+    restaurantData.owner = req.session.user.id
 
     let creatSuggestions = await Restaurant.create(restaurantData)
 
@@ -20,7 +21,7 @@ const creatSuggestion = async(req,res) => {
 }
 
 const showAllSuggestions = async (req, res) =>{
-    let allSuggestions = await Restaurant.find()
+    let allSuggestions = await Restaurant.find().populate()
     res.render('restaurants/show-all-restaurants.ejs', {
         allSuggestions,
     })
@@ -33,9 +34,23 @@ const showDetails = async (req, res) => {
     })
 }
 
+const deleteSuggestion = async (req,res) =>{
+    let foundRestaurant = await Restaurant.findById(req.params.restaurantId).populate('owner')
+    const isOwner = foundRestaurant.owner.equals(req.session.user._id)
+    const isAdmin = req.session.user.role === 'admin'
+
+    if( isOwner || isAdmin ){
+        await Restaurant.findByIdAndDelete(req.params.restaurantId)
+        res.redirect('/suggestions')
+    }else{
+        res.send('you cant delete')
+    }
+}
+
 module.exports = {
     showNewRestaurantForm,
     creatSuggestion,
     showAllSuggestions,
     showDetails,
+    deleteSuggestion,
 }

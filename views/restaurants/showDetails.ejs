@@ -6,9 +6,15 @@
 
 <a href="<%= foundRestaurant.location %>" class="btn btn-secondary">📍</a>
 <br>
-<a href="<%= foundRestaurant.instagram %>" class="btn btn-secondary">📸</a>
+<a href="<%= foundRestaurant.instagram %>" class="btn btn-secondary" >📸</a>
 <br>
 <a href="<%= "/suggestions" %>" class="btn btn-secondary">Back to All Restaurants</a>
+<br>
+<br>
+<form action="/restaurant/<%= foundRestaurant._id %>?_method=DELETE" method="POST">
+    
+    <button type="submit" class="btn btn-danger" >Delete</button>
+</form>
 
 </body>
 </html>
