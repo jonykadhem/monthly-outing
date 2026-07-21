@@ -16,10 +16,18 @@ const creatSuggestion = async(req,res) => {
 
     let creatSuggestions = await Restaurant.create(restaurantData)
 
-    res.redirect('/home')
+    res.redirect('/')
+}
+
+const showAllSuggestions = async (req, res) =>{
+    let allSuggestions = await Restaurant.find()
+    res.render('restaurants/show-all-restaurants.ejs', {
+        allSuggestions,
+    })
 }
 
 module.exports = {
     showNewRestaurantForm,
     creatSuggestion,
+    showAllSuggestions,
 }
