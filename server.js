@@ -69,6 +69,10 @@ app.delete('/restaurant/:restaurantId',isSignedIn, restaurantCtrl.deleteSuggesti
 app.get("/restaurant/:restaurantId/edit", isSignedIn, restaurantCtrl.showEditForm)
 app.put("/restaurant/:restaurantId", isSignedIn, restaurantCtrl.editRestaurant)
 
+// reviews routers
+app.get("/restaurant/:restaurantId/review", isSignedIn, reviewCtrl.showReviewForm)
+app.put("/restaurant/:restaurantId", isSignedIn, reviewCtrl.createReview)
+
 const startServer = async () => {
     try {
         await mongoose.connect(process.env.MONGODB_URI);

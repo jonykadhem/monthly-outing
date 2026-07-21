@@ -1,41 +1,30 @@
 <%- include("../partials/nav.ejs") %>
 
-<h1>Edit Restaurant</h1>
 
-<form action="/restaurant/<%= foundRestaurant.id %>?_method=PUT" method="POST">
+<form action="/restaurant/<%= foundRestaurant._id %>?_method=PUT" method="POST">
     <div>
-
-        <label for="name">Restaurant Name: </label>
-        <input type="text" name="name" value="<%= foundRestaurant.name %>">
-        <br>
-        <label for="location">Restaurant location: </label>
-        <input type="text" name="location" value="<%= foundRestaurant.location %>">
-        <br>
-        <label for="instagram">Restaurant instagram Account: </label>
-        <input type="text" name="instagram" value="<%= foundRestaurant.instagram %>">
-        <br>
-        <label for="recommendation">What do you recommend to try? </label>
-        <input type="text" name="recommendation" value="<%= foundRestaurant.recommendation %>">
-        <br>
-        <label for="details">Restaurant details: </label><br>
-        <textarea name="details" id=""><%= foundRestaurant.details %></textarea>
-        <br>
+        
+        <h1>Review: <%= foundRestaurant.name %></h1>
+        
+        
+        <p>Location: <%= foundRestaurant.location %></p>
+        <p>Instagram: <%= foundRestaurant.instagram %></p>
+        <p>Recommendation: <%= foundRestaurant.recommendation %></p>
+        <p>Details: <%= foundRestaurant.details %></p>
+      
         <br>
         <h5>Rating: (1-5)</h5>
         <label for="price">Price: </label>
-        <input type="number" name="price" min="1" max="5" value="<%= foundRestaurant.price %>">
+        <input type="number" name="price" min="1" max="5" >
         <br>
         <label for="quantity">Quantity: </label>
-        <input type="number" name="quantity" min="1" max="5" value="<%= foundRestaurant.quantity %>">
+        <input type="number" name="quantity" min="1" max="5" >
         <br>
         <label for="taste">Taste: </label>
-        <input type="number" name="taste" min="1" max="5" value="<%= foundRestaurant.taste %>">
+        <input type="number" name="taste" min="1" max="5" >
         <br>
         <label for="service">Service: </label>
-        <input type="number" name="service" min="1" max="5" value="<%= foundRestaurant.service %>">
-        <br>
-        <label for="overall">Overall: </label>
-        <input type="number" name="overall" min="1" max="5" value="<%= foundRestaurant.overall %>">
+        <input type="number" name="service" min="1" max="5" >
         <br>
         <label for="comment">Comments: </label><br>
         <textarea name="comment" id=""><%= foundRestaurant.comments %></textarea>

@@ -1,9 +1,19 @@
 const Review = require("../models/reviews")
 const Restaurant = require("../models/retaurantsList")
 const cloudinary = require('../config/cloudinary')
+const { model } = require("mongoose")
 
+
+
+const showReviewForm = async(req, res) => {
+    let foundRestaurant = await Restaurant.findById(req.params.restaurantId)
+    res.render('reviews/add-review.ejs',{
+        foundRestaurant,
+    })
+}
 
 const createReview = async (req,res) => {
+    
     const reviewData = {}
 
     reviewData.restaurantId = req.params.restaurantId
@@ -17,8 +27,17 @@ const createReview = async (req,res) => {
     await Review.create(reviewData)
 
     await Restaurant.findByIdAndUpdate(req.params.restaurantId, {
+        
         status: 'reviewed',
     })
 
     res.redirect('/suggestions')
+}
+
+
+
+
+module.exports = {
+    showReviewForm,
+    createReview,
 }
