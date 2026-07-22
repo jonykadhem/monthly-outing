@@ -8,7 +8,7 @@ A restaurant review web app that helps a group of reviewers manage the restauran
 
 ## Getting Started
 ### Try The App
-visit [Monthly Outing](https://monthly-outing.onrender.com)
+visit [Monthly Outing](https://monthly-outing-1.onrender.com)
 
 ### How To Use
 1. Sign up or sign in to your account.
