@@ -34,10 +34,20 @@ const createReview = async (req,res) => {
     res.redirect('/suggestions')
 }
 
+const showReviews = async(req, res) => {
+    let allReviews = await Restaurant.find({status: 'reviewed'}).populate()
+
+    res.render('/reviews/show-reviews.ejs', {
+        allReviews,
+    })
+
+}
+
 
 
 
 module.exports = {
     showReviewForm,
     createReview,
+    showReviews,
 }

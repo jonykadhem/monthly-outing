@@ -24,7 +24,7 @@ const showAllSuggestions = async (req, res) =>{
     let allSuggestions = await Restaurant.find({status: 'suggested'}).populate()
     res.render('restaurants/show-all-restaurants.ejs', {
         allSuggestions,
-        user:req.session.user,
+        
     })
 }
 
