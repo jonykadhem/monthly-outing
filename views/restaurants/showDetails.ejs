@@ -106,7 +106,7 @@ function toStars(num){
             Back
         </a>
 
-        <% if(foundRestaurant.owner._id.equals(user.id) || user.role==="admin"){ %>
+        <% if(user && (foundRestaurant.owner._id.equals(user.id) || user.role === "admin")){ %>
 
         <form action="/restaurant/<%= foundRestaurant._id %>?_method=DELETE" method="POST">
             <button class="delete-btn">

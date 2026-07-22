@@ -1,5 +1,7 @@
 ﻿const User = require("../models/user");
 const bcrypt = require("bcrypt");
+const Restaurant = require("../models/retaurantsList");
+const Review = require("../models/reviews");
 
 const home = (req, res) => {
     res.render("home.ejs", {
@@ -84,8 +86,7 @@ const signOut = (req, res) => {
     });
 };
 
-const Restaurant = require("../models/restaurantsList");
-const Review = require("../models/review");
+
 
 const dashboard = async (req, res) => {
 
@@ -96,7 +97,7 @@ const dashboard = async (req, res) => {
 
         const userCount = await User.countDocuments();
 
-        return res.render("auth/admin-dashboard", {
+        return res.render("admin-dashboard.ejs", {
             restaurantCount,
             reviewCount,
             userCount,
@@ -113,7 +114,7 @@ const dashboard = async (req, res) => {
         owner: req.session.user.id
     });
 
-    res.render("auth/dashboard", {
+    res.render("dashboard.ejs", {
         user: req.session.user,
         myRestaurants,
         reviewCount
