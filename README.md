@@ -18,3 +18,23 @@ visit [Monthly Outing](https://monthly-outing.onrender.com)
 5. Once reviewed, the restaurant moves to the reviews page with its average star rating.
 
 ### Installation
+
+### Technologies Used
+- HTML
+- CSS
+- JavaScript
+- Node.js
+- Express
+- EJS
+- MongoDB
+- Mongoose
+- Cloudinary
+- Bootstrap
+### Future Enhancements
+- search and filter restaurants by cuisine or area
+- comment replies and discussion threads
+- favorite/bookmark restaurants
+- email notifications when a suggestion gets reviewed
+- pagination for the feed and suggestions pages
+### Credits
+Created by **Sayed Mohsen Kadhem**
