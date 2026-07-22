@@ -1,3 +1,9 @@
+<%- include("../partials/head", {
+    title: "Restaurant Details",
+    css: "restaurant-details"
+}) %>
+
+
 <%- include("../partials/nav.ejs") %>
 
 <%
@@ -6,56 +12,131 @@ function toStars(num){
     return '★'.repeat(rounded) + '☆'.repeat(5 - rounded)
 }
 %>
+<div class="restaurant-container">
 
-<h1><%= foundRestaurant.name %></h1>
-<p><%= foundRestaurant.details %></p>
-<p><%= foundRestaurant.recommendation %></p>
+    <div class="restaurant-header">
 
-<a href="<%= foundRestaurant.location %>" class="btn btn-secondary">📍</a>
-<br>
-<a href="<%= foundRestaurant.instagram %>" class="btn btn-secondary">📸</a>
-<br>
-<br>
+        <h1><%= foundRestaurant.name %></h1>
 
-<% if (categoryAverages) { %>
-    
-    
-    <% reviews.forEach(element => { %>
-        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
-            <p>Price: <%= toStars(element.price) %></p>
-            <p>Taste: <%= toStars(element.taste) %></p>
-            <p>Service: <%= toStars(element.service) %></p>
-            <p>Quantity: <%= toStars(element.quantity) %></p>
-            <p>Comment: <%= element.comment %></p>
-            <h4>Overall Average Rating: <%= toStars(overallAverage) %> (<%= overallAverage %>/5, <%= reviews.length %> reviews)</h4>
-            <% if (user && user.role === 'admin' || user && user.role === 'reviewer') { %>
-                <form action="/restaurant/<%= foundRestaurant._id %>/review/<%= element._id %>/edit" method="GET">
-                    <button type="submit" class="btn btn-warning">Edit Review</button>
-                </form>
-                
-                <% } %>
+        <p class="restaurant-description">
+            <%= foundRestaurant.details %>
+        </p>
+
+        <p class="restaurant-recommendation">
+            <%= foundRestaurant.recommendation %>
+        </p>
+
+        <div class="restaurant-links">
+            <a href="<%= foundRestaurant.location %>" class="location-btn">
+                📍 Location
+            </a>
+
+            <a href="<%= foundRestaurant.instagram %>" class="instagram-btn">
+                📸 Instagram
+            </a>
+        </div>
+
+    </div>
+
+    <% if(categoryAverages){ %>
+
+    <div class="reviews-section">
+
+        <% reviews.forEach(element=>{ %>
+
+        <div class="review-card">
+
+            <div class="ratings">
+
+                <p><strong>Price</strong> <%= toStars(element.price) %></p>
+
+                <p><strong>Taste</strong> <%= toStars(element.taste) %></p>
+
+                <p><strong>Service</strong> <%= toStars(element.service) %></p>
+
+                <p><strong>Quantity</strong> <%= toStars(element.quantity) %></p>
+
             </div>
-            <% }) %>
-            <% } else { %>
-                <p>No reviews yet.</p>
-                <% if (user && user.role === 'admin') { %>
-                    <form action="/restaurant/<%= foundRestaurant._id %>/review" method="GET">
-                        <button type="submit" class="btn btn-warning">Review Restaurant</button>
-                    </form>
-                    
-                    <% } %>
-                    <% } %>
-                    
-                    <a href="/suggestions" class="btn btn-secondary">Back to All Restaurants</a>
-<br>
-<% if (found) { %>
- 
-<% } %>
-<form action="/restaurant/<%= foundRestaurant._id %>?_method=DELETE" method="POST">
-    <button type="submit" class="btn btn-danger">Delete</button>
-</form>
 
-<form action="/restaurant/<%= foundRestaurant._id %>/edit" method="GET">
-    <button type="submit" class="btn btn-warning">Edit</button>
-</form>
+            <p class="comment">
+                "<%= element.comment %>"
+            </p>
+
+            <% if(user && (user.role==="admin" || user.role==="reviewer")){ %>
+
+            <form action="/restaurant/<%= foundRestaurant._id %>/review/<%= element._id %>/edit" method="GET">
+
+                <button class="edit-review-btn">
+                    Edit Review
+                </button>
+
+            </form>
+
+            <% } %>
+
+        </div>
+
+        <% }) %>
+
+    </div>
+
+    <div class="average-rating">
+
+        <h3>
+            Overall Rating:
+            <span><%= toStars(overallAverage) %></span>
+
+            (<%= overallAverage %>/5,
+            <%= reviews.length %> Reviews)
+        </h3>
+
+    </div>
+
+    <% } else { %>
+
+    <p class="no-review">
+        No reviews yet.
+    </p>
+
+    <% } %>
+
+    <div class="action-buttons">
+
+        <a href="/suggestions" class="back-btn">
+            Back
+        </a>
+
+        <% if(foundRestaurant.owner._id.equals(user.id) || user.role==="admin"){ %>
+
+        <form action="/restaurant/<%= foundRestaurant._id %>?_method=DELETE" method="POST">
+            <button class="delete-btn">
+                Delete
+            </button>
+        </form>
+
+        <form action="/restaurant/<%= foundRestaurant._id %>/edit" method="GET">
+            <button class="edit-btn">
+                Edit
+            </button>
+        </form>
+
+        <% } %>
+
+        <% if(user && (user.role==="admin" || user.role==="reviewer")){ %>
+
+        <form action="/restaurant/<%= foundRestaurant._id %>/review" method="GET">
+            <button class="review-btn">
+                Review Restaurant
+            </button>
+        </form>
+
+        <% } %>
+
+    </div>
+
+</div>
+
+
+</body>
+</html>
 

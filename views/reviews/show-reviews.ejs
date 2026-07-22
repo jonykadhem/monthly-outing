@@ -1,18 +1,125 @@
+<%- include("../partials/head", {
+    title: "All Reviews",
+    css: "reviews"
+}) %>
+
+
 <%- include("../partials/nav.ejs") %>
 
-<h1>All Reviews</h1>
+<%
+function stars(number){
 
-<% allReviews.forEach(element => { %>
- <div class="card" style="width: 18rem;">
-  <img src="../../assits/wokman.png" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><%= element.name %></h5>
-    <p class="card-text"><%= element.details %></p>
-    <a href="<%= "/restaurant/" + element.id %>" class="btn btn-primary">View Details</a>
-  </div>
+    const rounded = Math.round(number);
+
+    return "★".repeat(rounded) + "☆".repeat(5-rounded);
+
+}
+%>
+
+<div class="reviews-page">
+
+    <h1 class="page-title">
+        Restaurant Reviews
+    </h1>
+
+    <div class="reviews-grid">
+
+        <% allReviews.forEach(item=>{ %>
+
+            <div class="review-card">
+
+                <img src="/assits/wokman.png"
+                     class="restaurant-image">
+
+                <div class="card-body">
+
+                    <h2>
+                        <%= item.restaurant.name %>
+                    </h2>
+
+                    <div class="overall">
+
+                        <span class="big-stars">
+
+                            <%= stars(item.overallAverage) %>
+
+                        </span>
+
+                        <span>
+
+                            <%= item.overallAverage.toFixed(1) %>/5
+
+                        </span>
+
+                    </div>
+
+                    <div class="category">
+
+                        <p>💰 Price
+                            <span>
+                                <%= stars(item.avgPrice) %>
+                            </span>
+
+                            (<%= item.avgPrice.toFixed(1) %>)
+                        </p>
+
+                        <p>🍔 Taste
+                            <span>
+                                <%= stars(item.avgTaste) %>
+                            </span>
+
+                            (<%= item.avgTaste.toFixed(1) %>)
+                        </p>
+
+                        <p>👨‍🍳 Service
+                            <span>
+                                <%= stars(item.avgService) %>
+                            </span>
+
+                            (<%= item.avgService.toFixed(1) %>)
+                        </p>
+
+                        <p>🍽 Quantity
+                            <span>
+                                <%= stars(item.avgQuantity) %>
+                            </span>
+
+                            (<%= item.avgQuantity.toFixed(1) %>)
+                        </p>
+
+                    </div>
+
+                    <div class="comment">
+
+                        "<%= item.latestComment %>"
+
+                    </div>
+
+                    <div class="bottom">
+
+                        <span>
+
+                            <%= item.totalReviews %> Reviews
+
+                        </span>
+
+                        <a href="/restaurant/<%= item.restaurant._id %>">
+
+                            View Restaurant →
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
 </div>
-
-<% }) %>
 
 </body>
 </html>

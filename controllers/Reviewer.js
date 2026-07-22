@@ -38,8 +38,47 @@ const createReview = async (req,res) => {
 }
 
 const showAllReviews = async(req, res) => {
-    let allReviews = await Restaurant.find({status: 'reviewed'}).populate()
+    let restaurants = await Restaurant.find({status: 'reviewed'}).populate()
 
+    const allReviews = []
+
+    for (const restaurant of restaurants) {
+        const reviews = await Review.find({ restaurantId: restaurant._id })
+        
+        if(reviews.length === 0)continue
+        
+        const total = {
+            price: 0,
+            taste: 0,
+            quantity: 0,
+            service: 0,
+        }
+        reviews.forEach(review => {
+            total.price += review.price
+            total.taste += review.taste
+            total.quantity += review.quantity
+            total.service += review.service
+        })
+
+        const avgPrice = (total.price / reviews.length)
+        const avgTaste = (total.taste / reviews.length)
+        const avgQuantity = (total.quantity / reviews.length)
+        const avgService = (total.service / reviews.length)
+
+        const overallAverage = ((avgPrice + avgTaste + avgQuantity + avgService) / 4)
+
+        allReviews.push({
+            restaurant,
+            avgPrice,
+            avgTaste,
+            avgQuantity,
+            avgService,
+            overallAverage,
+            totalReviews: reviews.length,
+            latestComment: reviews[reviews.length - 1].comment,
+        })
+    }
+console.log(allReviews);
     res.render('reviews/show-reviews.ejs', {
         allReviews,
     })

@@ -1,18 +1,53 @@
+<%- include("../partials/head", {
+    title: "Suggested Restaurants",
+    css: "suggestions"
+}) %>
+
+
 <%- include("../partials/nav.ejs") %>
 
-<h1>All Suggseted Restaurants</h1>
+<div class="restaurants-page">
 
-<% allSuggestions.forEach(element => { %>
- <div class="card" style="width: 18rem;">
-  <img src="../../assits/wokman.png" class="card-img-top" alt="...">
-  <div class="card-body">
-    <h5 class="card-title"><%= element.name %></h5>
-    <p class="card-text"><%= element.details %></p>
-    <a href="<%= "/restaurant/" + element.id %>" class="btn btn-primary">View Details</a>
-  </div>
+    <h1 class="page-title">
+        All Suggested Restaurants
+    </h1>
+
+    <div class="restaurant-grid">
+
+        <% allSuggestions.forEach(element => { %>
+
+            <div class="restaurant-card">
+
+                <img
+                    src="/assits/wokman.png"
+                    class="restaurant-image"
+                    alt="<%= element.name %>"
+                >
+
+                <div class="restaurant-info">
+
+                    <h3><%= element.name %></h3>
+
+                    <p>
+                        <%= element.details %>
+                    </p>
+
+                    <a
+                        href="/restaurant/<%= element._id %>"
+                        class="details-btn"
+                    >
+                        View Details
+                    </a>
+
+                </div>
+
+            </div>
+
+        <% }) %>
+
+    </div>
+
 </div>
-
-<% }) %>
 
 </body>
 </html>
