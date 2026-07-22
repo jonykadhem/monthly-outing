@@ -1,0 +1,37 @@
+<%- include("../partials/nav.ejs") %>
+
+
+<form action="/restaurant/<%= foundReview._id %>/edit-review" method="POST">
+    <div>
+        
+        <h1>Edit Review: <%= foundRestaurant.name %></h1>
+        
+        
+        <p>Location: <%= foundRestaurant.location %></p>
+        <p>Instagram: <%= foundRestaurant.instagram %></p>
+        <p>Recommendation: <%= foundRestaurant.recommendation %></p>
+        <p>Details: <%= foundRestaurant.details %></p>
+      
+        <br>
+        <h5>Rating: (1-5)</h5>
+        <label for="price">Price: </label>
+        <input type="number" name="price" min="1" max="5" value="<%= foundReview.price %>">
+        <br>
+        <label for="quantity">Quantity: </label>
+        <input type="number" name="quantity" min="1" max="5" value="<%= foundReview.quantity %>">
+        <br>
+        <label for="taste">Taste: </label>
+        <input type="number" name="taste" min="1" max="5" value="<%= foundReview.taste %>">
+        <br>
+        <label for="service">Service: </label>
+        <input type="number" name="service" min="1" max="5" value="<%= foundReview.service %>">
+        <br>
+        <label for="comment">Comments: </label><br>
+        <textarea name="comment" id=""><%= foundReview.comment %></textarea>
+        <br>
+        <button type="submit">Edit Review</button>
+    </div>
+</form>
+
+</body>
+</html>

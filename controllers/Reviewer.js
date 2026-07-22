@@ -46,6 +46,32 @@ const showAllReviews = async(req, res) => {
 
 }
 
+const showEditReviewForm = async (req, res) => {
+    const foundReview = await Review.findById(req.params.reviewId)
+    const foundRestaurant = await Restaurant.findById(req.params.restaurantId)
+
+    res.render('reviews/edit-review.ejs', {
+        foundReview,
+        foundRestaurant,
+    })
+}
+const editReview = async (req, res) => {
+    let foundRestaurant = await Restaurant.findById(req.params.restaurantId).populate('owner')
+const reviewData = {}
+
+    reviewData.restaurantId = req.params.restaurantId
+    reviewData.reviewerId = req.session.user.id
+    reviewData.price = req.body.price
+    reviewData.taste = req.body.taste
+    reviewData.service = req.body.service
+    reviewData.quantity = req.body.quantity
+    reviewData.comment = req.body.comment
+
+    await Review.findByIdAndUpdate(req.params.reviewId, reviewData)
+    res.redirect(`/restaurant/${req.params.restaurantId}`)
+}
+
+
 
 
 
@@ -55,4 +81,6 @@ module.exports = {
     showReviewForm,
     createReview,
     showAllReviews,
+    showEditReviewForm,
+    editReview,
 }

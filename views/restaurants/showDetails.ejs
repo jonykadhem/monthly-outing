@@ -1,28 +1,52 @@
 <%- include("../partials/nav.ejs") %>
 
+<%
+function toStars(num){
+    const rounded = Math.round(num)
+    return '★'.repeat(rounded) + '☆'.repeat(5 - rounded)
+}
+%>
+
 <h1><%= foundRestaurant.name %></h1>
 <p><%= foundRestaurant.details %></p>
 <p><%= foundRestaurant.recommendation %></p>
 
 <a href="<%= foundRestaurant.location %>" class="btn btn-secondary">📍</a>
 <br>
-<a href="<%= foundRestaurant.instagram %>" class="btn btn-secondary" >📸</a>
+<a href="<%= foundRestaurant.instagram %>" class="btn btn-secondary">📸</a>
 <br>
-<a href="<%= "/suggestions" %>" class="btn btn-secondary">Back to All Restaurants</a>
+<a href="/suggestions" class="btn btn-secondary">Back to All Restaurants</a>
 <br>
+
+<% if (categoryAverages) { %>
+      
+
+    <% reviews.forEach(element => { %>
+        <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
+            <p>Price: <%= toStars(element.price) %></p>
+            <p>Taste: <%= toStars(element.taste) %></p>
+            <p>Service: <%= toStars(element.service) %></p>
+            <p>Quantity: <%= toStars(element.quantity) %></p>
+            <p>Comment: <%= element.comment %></p>
+            <h4>Overall Average Rating: <%= toStars(overallAverage) %> (<%= overallAverage %>/5, <%= reviews.length %> reviews)</h4>
+        <form action="/restaurant/<%= foundRestaurant._id %>/review/<%= element._id %>/edit" method="GET">
+            <button type="submit" class="btn btn-warning">Edit Review</button>
+        </form>
+        </div>
+    <% }) %>
+<% } else { %>
+  <p>No reviews yet.</p>
+  <form action="/restaurant/<%= foundRestaurant._id %>/review" method="GET">
+    <button type="submit" class="btn btn-warning">Review Restaurant</button>
+</form>
+<% } %>
+
 <br>
 <form action="/restaurant/<%= foundRestaurant._id %>?_method=DELETE" method="POST">
-    
-    <button type="submit" class="btn btn-danger" >Delete</button>
+    <button type="submit" class="btn btn-danger">Delete</button>
 </form>
+
 <form action="/restaurant/<%= foundRestaurant._id %>/edit" method="GET">
-    
-    <button type="submit" class="btn btn-warning" >Edit</button>
+    <button type="submit" class="btn btn-warning">Edit</button>
 </form>
 
-<form action="/restaurant/<%= foundRestaurant._id %>/review" method="GET">
-    <button type="submit" class="btn btn-warning" >Review Restaurant</button>
-</form>
-
-</body>
-</html>

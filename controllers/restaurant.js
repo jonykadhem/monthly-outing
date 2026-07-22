@@ -29,9 +29,36 @@ const showAllSuggestions = async (req, res) =>{
 }
 
 const showDetails = async (req, res) => {
-    let foundRestaurant = await Restaurant.findById(req.params.restaurantId)
+    const foundRestaurant = await Restaurant.findById(req.params.restaurantId)
+    const reviews = await Review.find({restaurantId:req.params.restaurantId}).populate('reviewerId')
+
+    let categoryAverages = null
+    let overallAverage = null
+
+    if(reviews.length > 0){
+        const total = reviews.reduce((acc, review) => {
+            acc.price += review.price
+            acc.taste += review.taste
+            acc.quantity += review.quantity
+            acc.service += review.service
+            return acc
+        }, { price: 0, taste: 0, quantity: 0, service: 0 })
+
+        categoryAverages = {
+            price: total.price / reviews.length,
+            taste: total.taste / reviews.length,
+            quantity: total.quantity / reviews.length,
+            service: total.service / reviews.length,
+        }
+        const totalAll = categoryAverages.price + categoryAverages.taste + categoryAverages.quantity + categoryAverages.service
+        overallAverage = (totalAll / (reviews.length * 4)).toFixed(1)
+    }
+
     res.render('restaurants/showDetails.ejs', {
-        foundRestaurant
+        foundRestaurant,
+        reviews,
+        categoryAverages,
+        overallAverage,
     })
 }
 
