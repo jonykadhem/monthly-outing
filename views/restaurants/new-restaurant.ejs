@@ -1,28 +1,85 @@
+<%- include("../partials/head", {
+    title: "Add Restaurant",
+    css: "add-restaurant"
+}) %>
+
+
 <%- include("../partials/nav.ejs") %>
 
-<h1>Add Restaurant to Reviewe</h1>
+<div class="form-container">
 
-<form action="/restaurants" method="post">
-    <div>
+    <div class="form-card">
 
-        <label for="name">Restaurant Name: </label>
-        <input type="text" name="name">
-        <br>
-        <label for="location">Restaurant location: </label>
-        <input type="text" name="location">
-        <br>
-        <label for="instagram">Restaurant instagram Account: </label>
-        <input type="text" name="instagram">
-        <br>
-        <label for="recommendation">What do you recommende to try? </label>
-        <input type="text" name="recommendation">
-        <br>
-        <label for="details">Restaurant details: </label><br>
-        <textarea name="details" id=""></textarea>
-        <br>
-        <button type="submit">submit</button>
+        <h1>Add Restaurant to Review</h1>
+
+        <p class="subtitle">
+            Share a restaurant with the community.
+        </p>
+
+        <form action="/restaurants" method="POST">
+
+            <div class="form-group">
+                <label for="name">Restaurant Name</label>
+                <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    placeholder="e.g. Healthy Calorie"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input
+                    type="text"
+                    id="location"
+                    name="location"
+                    placeholder="Google Maps link"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="instagram">Instagram Account</label>
+                <input
+                    type="text"
+                    id="instagram"
+                    name="instagram"
+                    placeholder="instagram account link"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="recommendation">Recommended Dish</label>
+                <input
+                    type="text"
+                    id="recommendation"
+                    name="recommendation"
+                    placeholder="What should people try?"
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="details">Restaurant Details</label>
+
+                <textarea
+                    id="details"
+                    name="details"
+                    rows="5"
+                    placeholder="Tell people about the restaurant..."
+                ></textarea>
+            </div>
+
+            <button class="submit-btn" type="submit">
+                Submit Restaurant
+            </button>
+
+        </form>
+
     </div>
-</form>
+
+</div>
 
 </body>
 </html>

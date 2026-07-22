@@ -1,37 +1,76 @@
+<%- include("../partials/head", {
+    title: "Edit Review",
+    css: "edit-review"
+}) %>
+
 <%- include("../partials/nav.ejs") %>
 
+<div class="edit-review-container">
 
-<form action="/restaurant/<%= foundRestaurant._id %>/review/<%= foundReview._id %>?_method=PUT" method="POST">
-    <div>
-        
-        <h1>Edit Review: <%= foundRestaurant.name %></h1>
-        
-        
-        <p>Location: <%= foundRestaurant.location %></p>
-        <p>Instagram: <%= foundRestaurant.instagram %></p>
-        <p>Recommendation: <%= foundRestaurant.recommendation %></p>
-        <p>Details: <%= foundRestaurant.details %></p>
-      
-        <br>
-        <h5>Rating: (1-5)</h5>
-        <label for="price">Price: </label>
-        <input type="number" name="price" min="1" max="5" value="<%= foundReview.price %>">
-        <br>
-        <label for="quantity">Quantity: </label>
-        <input type="number" name="quantity" min="1" max="5" value="<%= foundReview.quantity %>">
-        <br>
-        <label for="taste">Taste: </label>
-        <input type="number" name="taste" min="1" max="5" value="<%= foundReview.taste %>">
-        <br>
-        <label for="service">Service: </label>
-        <input type="number" name="service" min="1" max="5" value="<%= foundReview.service %>">
-        <br>
-        <label for="comment">Comments: </label><br>
-        <textarea name="comment" id=""><%= foundReview.comment %></textarea>
-        <br>
-        <button type="submit">Edit Review</button>
+    <div class="review-card">
+
+        <h1>Edit Review</h1>
+
+        <h2><%= foundRestaurant.name %></h2>
+
+        <div class="restaurant-info">
+
+            <p><strong>📍 Location:</strong> <%= foundRestaurant.location %></p>
+
+            <p><strong>📸 Instagram:</strong> <%= foundRestaurant.instagram %></p>
+
+            <p><strong>🍽 Recommendation:</strong> <%= foundRestaurant.recommendation %></p>
+
+            <p><strong>📝 Details:</strong> <%= foundRestaurant.details %></p>
+
+        </div>
+
+        <form action="/restaurant/<%= foundRestaurant._id %>/review/<%= foundReview._id %>?_method=PUT" method="POST">
+
+            <div class="ratings-grid">
+
+                <div class="form-group">
+                    <label>Price</label>
+                    <input type="number" name="price" min="1" max="5" value="<%= foundReview.price %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Taste</label>
+                    <input type="number" name="taste" min="1" max="5" value="<%= foundReview.taste %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Service</label>
+                    <input type="number" name="service" min="1" max="5" value="<%= foundReview.service %>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" name="quantity" min="1" max="5" value="<%= foundReview.quantity %>" required>
+                </div>
+
+            </div>
+
+            <div class="form-group">
+
+                <label>Your Review</label>
+
+                <textarea
+                    name="comment"
+                    rows="5"
+                    required><%= foundReview.comment %></textarea>
+
+            </div>
+
+            <button class="submit-btn" type="submit">
+
+                Save Changes
+
+            </button>
+
+        </form>
+
     </div>
-</form>
 
-</body>
-</html>
+</div>
+
