@@ -2,26 +2,38 @@ const Restaurant = require("../models/retaurantsList")
 const cloudinary = require('../config/cloudinary')
 const Review = require("../models/reviews")
 
+
+
+
+
 //adding restaurants suggestions
 const showNewRestaurantForm = (req, res) => {
     res.render('restaurants/new-restaurant.ejs')
 }
-const creatSuggestion = async(req,res) => {
-    const restaurantData = {}
-    restaurantData.name = req.body.name
-    restaurantData.location = req.body.location
-    restaurantData.instagram = req.body.instagram
-    restaurantData.recommendation = req.body.recommendation
-    restaurantData.details = req.body.details
-    restaurantData.owner = req.session.user.id
+const creatSuggestion = async (req, res) => {
+    try {
+        const restaurantData = {
+    name: req.body.name,
+    location: req.body.location,
+    instagram: req.body.instagram,
+    recommendation: req.body.recommendation,
+    details: req.body.details,
+    owner: req.session.user.id,
+    image: req.body.image
+};
 
-    let creatSuggestions = await Restaurant.create(restaurantData)
+        await Restaurant.create(restaurantData);
 
-    res.redirect('/suggestions')
-}
+        res.redirect("/suggestions");
+    } catch (err) {
+        console.error(err);
+        res.status(500).send(err);
+    }
+};
 
 const showAllSuggestions = async (req, res) =>{
     let allSuggestions = await Restaurant.find({status: 'suggested'}).populate()
+    console.log(allSuggestions);
     res.render('restaurants/show-all-restaurants.ejs', {
         allSuggestions,
         
@@ -83,15 +95,16 @@ const showEditForm = async(req, res) => {
 const editRestaurant = async (req, res) => {
     let foundRestaurant = await Restaurant.findById(req.params.restaurantId).populate('owner')
 
-    const restaurantData = {}
-    restaurantData.name = req.body.name
-    restaurantData.location = req.body.location
-    restaurantData.instagram = req.body.instagram
-    restaurantData.recommendation = req.body.recommendation
-    restaurantData.details = req.body.details
-    restaurantData.owner = req.session.user.id
+   const restaurantData = {
+    name: req.body.name,
+    location: req.body.location,
+    instagram: req.body.instagram,
+    recommendation: req.body.recommendation,
+    details: req.body.details,
+    image: req.body.image,
+};
 
-    await Restaurant.findByIdAndUpdate(req.params.restaurantId, req.body)
+await Restaurant.findByIdAndUpdate(req.params.restaurantId, restaurantData);
     res.redirect(`/restaurant/${req.params.restaurantId}`)
 }
 

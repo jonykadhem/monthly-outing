@@ -84,10 +84,41 @@ const signOut = (req, res) => {
     });
 };
 
-const dashboard = (req, res) => {
-    res.render("dashboard.ejs", {
-        user: req.session.user,
+const Restaurant = require("../models/restaurantsList");
+const Review = require("../models/review");
+
+const dashboard = async (req, res) => {
+
+    if (req.session.user.role === "admin") {
+
+        const restaurantCount = await Restaurant.countDocuments();
+        const reviewCount = await Review.countDocuments();
+
+        const userCount = await User.countDocuments();
+
+        return res.render("auth/admin-dashboard", {
+            restaurantCount,
+            reviewCount,
+            userCount,
+            user: req.session.user
+        });
+
+    }
+
+    const myRestaurants = await Restaurant.find({
+        owner: req.session.user.id
     });
+
+    const reviewCount = await Review.countDocuments({
+        owner: req.session.user.id
+    });
+
+    res.render("auth/dashboard", {
+        user: req.session.user,
+        myRestaurants,
+        reviewCount
+    });
+
 };
 
 const showAdmin = async(req,res) => {

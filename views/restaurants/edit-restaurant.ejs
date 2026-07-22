@@ -1,103 +1,82 @@
-<%- include("../partials/head", {
-    title: "Edit Restaurant",
-    css: "add-restaurant"
-}) %>
+<%- include("../partials/head", { title: "Edit Restaurant" , css: "add-restaurant" }) %>
 
 
-<%- include("../partials/nav.ejs") %>
+    <%- include("../partials/nav.ejs") %>
 
-<div class="form-container">
+        <div class="form-container">
 
-    <div class="form-card">
+            <div class="form-card">
 
-        <h1>Edit Restaurant</h1>
+                <h1>Edit Restaurant</h1>
 
-        <p class="subtitle">
-            Update the restaurant information.
-        </p>
+                <p class="subtitle">
+                    Update the restaurant information.
+                </p>
 
-        <form action="/restaurants/<%= foundRestaurant._id %>?_method=PUT" method="POST">
+                <form action="/restaurant/<%= foundRestaurant._id %>?_method=PUT" method="POST">
 
-            <div class="form-group">
+                    <div class="form-group">
 
-                <label for="name">Restaurant Name</label>
+                        <label for="name">Restaurant Name</label>
 
-                <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value="<%= foundRestaurant.name %>"
-                    required
-                >
+                        <input type="text" id="name" name="name" value="<%= foundRestaurant.name %>" required>
 
-            </div>
+                    </div>
 
-            <div class="form-group">
+                    <div class="form-group">
 
-                <label for="location">Location</label>
+                        <label for="location">Location</label>
 
-                <input
-                    type="text"
-                    id="location"
-                    name="location"
-                    value="<%= foundRestaurant.location %>"
-                    required
-                >
+                        <input type="text" id="location" name="location" value="<%= foundRestaurant.location %>"
+                            required>
 
-            </div>
+                    </div>
 
-            <div class="form-group">
+                    <div class="form-group">
 
-                <label for="instagram">Instagram Account</label>
+                        <label for="instagram">Instagram Account</label>
 
-                <input
-                    type="text"
-                    id="instagram"
-                    name="instagram"
-                    value="<%= foundRestaurant.instagram %>"
-                    placeholder="@restaurant"
-                >
+                        <input type="text" id="instagram" name="instagram" value="<%= foundRestaurant.instagram %>"
+                            placeholder="@restaurant">
 
-            </div>
+                    </div>
 
-            <div class="form-group">
+                    <div class="form-group">
 
-                <label for="recommendation">Recommended Dish</label>
+                        <label for="recommendation">Recommended Dish</label>
 
-                <input
-                    type="text"
-                    id="recommendation"
-                    name="recommendation"
-                    value="<%= foundRestaurant.recommendation %>"
-                    placeholder="What should people try?"
-                >
+                        <input type="text" id="recommendation" name="recommendation"
+                            value="<%= foundRestaurant.recommendation %>" placeholder="What should people try?">
 
-            </div>
+                    </div>
 
-            <div class="form-group">
+                    <div class="form-group">
 
-                <label for="details">Restaurant Details</label>
+                        <label for="details">Restaurant Details</label>
 
-                <textarea
-                    id="details"
-                    name="details"
-                    rows="5"
-                    placeholder="Tell people about the restaurant..."
-                ><%= foundRestaurant.details %></textarea>
+                        <textarea id="details" name="details" rows="5"
+                            placeholder="Tell people about the restaurant..."><%= foundRestaurant.details %></textarea>
+
+                    </div>
+                    <div class="form-group">
+
+                        <label for="image">Image URL</label>
+                        <input type="url" id="image" name="image" value="<%= foundRestaurant.image %>" placeholder="https://example.com/image.jpg" required>
+
+                    </div>
+
+                    <button class="submit-btn" type="submit">
+
+                        Save Changes
+
+                    </button>
+
+                </form>
 
             </div>
 
-            <button class="submit-btn" type="submit">
+        </div>
 
-                Save Changes
+        </body>
 
-            </button>
-
-        </form>
-
-    </div>
-
-</div>
-
-</body>
-</html>
+        </html>

@@ -1,13 +1,114 @@
-﻿<%- include("./partials/nav.ejs") %>
+﻿<%- include("./partials/head", {
+    title: "Monthly Outing",
+    css: "home"
+}) %>
 
-<main>
-    <h1>Authentication App</h1>
+<%- include("./partials/nav") %>
 
-    <% if (user) { %>
-        <p>Welcome To The Monthly Outing Page.</p>
-    <% } else { %>
-        <p>.</p>
-    <% } %>
-</main>
+<!-- Hero Section -->
+<section class="hero">
+
+    <div class="hero-overlay">
+
+        <h1>Monthly Outing</h1>
+
+        <p>
+            Discover, review, and share the best restaurants in Bahrain.
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="/suggestions" class="primary-btn">
+                🍽 Explore Restaurants
+            </a>
+
+            <% if(user){ %>
+
+                <a href="/restaurant/new" class="secondary-btn">
+                    ➕ Add Suggestion
+                </a>
+
+            <% } %>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Features -->
+
+<section class="features">
+
+    <h2>Why Monthly Outing?</h2>
+
+    <div class="feature-grid">
+
+        <div class="feature-card">
+
+            <div class="icon">🍽</div>
+
+            <h3>Discover</h3>
+
+            <p>
+                Browse restaurants suggested by our community.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="icon">⭐</div>
+
+            <h3>Reviews</h3>
+
+            <p>
+                Read ratings based on taste, service, quantity and price.
+            </p>
+
+        </div>
+
+        <div class="feature-card">
+
+            <div class="icon">💡</div>
+
+            <h3>Recommend</h3>
+
+            <p>
+                Share your favourite restaurants with everyone.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+<!-- Call To Action -->
+
+<section class="cta">
+
+    <h2>Ready to discover your next favourite restaurant?</h2>
+
+    <a href="/suggestions" class="primary-btn">
+        View Restaurants
+    </a>
+
+</section>
+
+<footer>
+
+    <h3>Monthly Outing</h3>
+
+    <p>
+        A community-driven restaurant recommendation platform.
+    </p>
+
+    <p>
+        Arab Open University © 2026
+    </p>
+
+</footer>
+
 </body>
 </html>

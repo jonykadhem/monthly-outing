@@ -29,6 +29,11 @@ const restaurantsSchema = new mongoose.Schema({
         enum: ['suggested', 'reviewed'],
         default: 'suggested',
     },
+    image: {
+    type: String,
+    default: "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4"
+    },
+    
     
 },{ timestamps: true });
 

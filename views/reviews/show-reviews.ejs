@@ -28,8 +28,7 @@ function stars(number){
 
             <div class="review-card">
 
-                <img src="/assits/wokman.png"
-                     class="restaurant-image">
+                <img src="<%= item.restaurant.image || '/assets/default-restaurant.jpg' %>" alt="<%= item.restaurant.name %>">
 
                 <div class="card-body">
 

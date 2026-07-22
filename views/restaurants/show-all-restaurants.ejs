@@ -4,6 +4,7 @@
 }) %>
 
 
+
 <%- include("../partials/nav.ejs") %>
 
 <div class="restaurants-page">
@@ -18,11 +19,7 @@
 
             <div class="restaurant-card">
 
-                <img
-                    src="/assits/wokman.png"
-                    class="restaurant-image"
-                    alt="<%= element.name %>"
-                >
+                <img src="<%= element.image || '/assets/default-restaurant.jpg' %>" alt="<%= element.name %>">
 
                 <div class="restaurant-info">
 

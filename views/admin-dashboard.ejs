@@ -1,0 +1,81 @@
+<%- include("../partials/head",{
+title:"Admin Dashboard",
+css:"dashboard"
+}) %>
+
+<%- include("../partials/nav") %>
+
+<div class="dashboard">
+
+<h1>
+
+Admin Dashboard
+
+</h1>
+
+<div class="admin-stats">
+
+<div class="stat-card">
+
+🍽
+
+<h2><%= restaurantCount %></h2>
+
+<p>Restaurants</p>
+
+</div>
+
+<div class="stat-card">
+
+⭐
+
+<h2><%= reviewCount %></h2>
+
+<p>Reviews</p>
+
+</div>
+
+<div class="stat-card">
+
+👥
+
+<h2><%= userCount %></h2>
+
+<p>Users</p>
+
+</div>
+
+</div>
+
+<div class="quick-actions">
+
+<a href="/admin">
+
+Manage Users
+
+</a>
+
+<a href="/suggestions">
+
+Restaurants
+
+</a>
+
+<a href="/reviews">
+
+Reviews
+
+</a>
+
+<a href="/restaurant/new">
+
+Add Restaurant
+
+</a>
+
+</div>
+
+</div>
+
+</body>
+</html>

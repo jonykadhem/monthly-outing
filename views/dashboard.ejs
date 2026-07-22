@@ -1,8 +1,117 @@
-﻿<%- include("./partials/nav.ejs") %>
+﻿<%- include("../partials/head",{
+title:"Dashboard",
+css:"dashboard"
+}) %>
 
-<main>
-    <h1>Welcome to the dashboard, <%= user.username %></h1>
-    <p>This page is only available to signed-in users.</p>
-</main>
+<%- include("../partials/nav") %>
+
+<div class="dashboard">
+
+    <div class="profile-card">
+
+        <div class="avatar">
+            👤
+        </div>
+
+        <h1>
+            <%= user.username %>
+        </h1>
+
+        <p class="role">
+            <%= user.role %>
+        </p>
+
+        <div class="stats">
+
+            <div>
+
+                <h2>
+                    <%= myRestaurants.length %>
+                </h2>
+
+                <span>Suggestions</span>
+
+            </div>
+
+            <div>
+
+                <h2>
+                    <%= reviewCount %>
+                </h2>
+
+                <span>Reviews</span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <h2 class="section-title">
+
+        🍽 My Suggested Restaurants
+
+    </h2>
+
+    <% if(myRestaurants.length){ %>
+
+    <div class="restaurant-grid">
+
+        <% myRestaurants.forEach(restaurant=>{ %>
+
+        <div class="restaurant-card">
+
+            <img
+                src="<%= restaurant.image %>"
+                alt="<%= restaurant.name %>">
+
+            <div class="restaurant-content">
+
+                <h3>
+                    <%= restaurant.name %>
+                </h3>
+
+                <p>
+                    <%= restaurant.recommendation %>
+                </p>
+
+                <a
+                    href="/restaurant/<%= restaurant._id %>"
+                    class="view-btn">
+
+                    View Details
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <% }) %>
+
+    </div>
+
+    <% } else { %>
+
+        <div class="empty-state">
+
+            <h2>
+
+                You haven't suggested any restaurants yet.
+
+            </h2>
+
+            <a href="/restaurant/new" class="view-btn">
+
+                Add Your First Suggestion
+
+            </a>
+
+        </div>
+
+    <% } %>
+
+</div>
+
 </body>
 </html>

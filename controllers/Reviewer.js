@@ -13,7 +13,6 @@ const showReviewForm = async(req, res) => {
 }
 
 const createReview = async (req,res) => {
-    console.log(req.body)
     
     const reviewData = {}
 
@@ -27,7 +26,6 @@ const createReview = async (req,res) => {
 
     const createdReview = await Review.create(reviewData)
 
-    console.log(createdReview)
 
     await Restaurant.findByIdAndUpdate(req.params.restaurantId, {
         
@@ -78,7 +76,6 @@ const showAllReviews = async(req, res) => {
             latestComment: reviews[reviews.length - 1].comment,
         })
     }
-console.log(allReviews);
     res.render('reviews/show-reviews.ejs', {
         allReviews,
     })

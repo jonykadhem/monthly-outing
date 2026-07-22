@@ -4,13 +4,14 @@
 // Remove these two lines if your regular DNS works correctly.
 dns.setServers(["8.8.8.8", "1.1.1.1"]);
 
-require("dotenv").config();
-
+const dotenv = require("dotenv");
+dotenv.config();
 
 const passUserToView = require("./middleware/pass-user-to-view.js");
 const methodOverride = require("method-override");
 const { MongoStore } = require("connect-mongo");
 const upload = require("./config/multer");
+const cloudinary = require("./config/cloudinary");
 const session = require("express-session");
 const mongoose = require("mongoose");
 const express = require("express");
@@ -68,6 +69,7 @@ app.get('/restaurant/:restaurantId', restaurantCtrl.showDetails)
 app.delete('/restaurant/:restaurantId',isSignedIn, restaurantCtrl.deleteSuggestion)
 app.get("/restaurant/:restaurantId/edit", isSignedIn, restaurantCtrl.showEditForm)
 app.put("/restaurant/:restaurantId", isSignedIn, restaurantCtrl.editRestaurant)
+// app.post('/restaurant/:restaurantId', upload.single('image'), restaurantCtrl.creatSuggestion)
 
 // reviews routers
 app.get("/restaurant/:restaurantId/review", isSignedIn, reviewCtrl.showReviewForm)
