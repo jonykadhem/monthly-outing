@@ -21,7 +21,7 @@ const creatSuggestion = async(req,res) => {
 }
 
 const showAllSuggestions = async (req, res) =>{
-    let allSuggestions = await Restaurant.find({status: 'reviewed'}).populate()
+    let allSuggestions = await Restaurant.find({status: 'suggested'}).populate()
     res.render('restaurants/show-all-restaurants.ejs', {
         allSuggestions,
         
@@ -29,7 +29,7 @@ const showAllSuggestions = async (req, res) =>{
 }
 
 const showDetails = async (req, res) => {
-    const foundRestaurant = await Restaurant.findById(req.params.restaurantId)
+    const foundRestaurant = await Restaurant.findById(req.params.restaurantId).populate('owner')
     const reviews = await Review.find({restaurantId:req.params.restaurantId}).populate('reviewerId')
 
     let categoryAverages = null

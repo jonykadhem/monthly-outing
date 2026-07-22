@@ -15,12 +15,11 @@ function toStars(num){
 <br>
 <a href="<%= foundRestaurant.instagram %>" class="btn btn-secondary">📸</a>
 <br>
-<a href="/suggestions" class="btn btn-secondary">Back to All Restaurants</a>
 <br>
 
 <% if (categoryAverages) { %>
-      
-
+    
+    
     <% reviews.forEach(element => { %>
         <div style="border: 1px solid #ccc; padding: 10px; margin-bottom: 10px;">
             <p>Price: <%= toStars(element.price) %></p>
@@ -29,19 +28,29 @@ function toStars(num){
             <p>Quantity: <%= toStars(element.quantity) %></p>
             <p>Comment: <%= element.comment %></p>
             <h4>Overall Average Rating: <%= toStars(overallAverage) %> (<%= overallAverage %>/5, <%= reviews.length %> reviews)</h4>
-        <form action="/restaurant/<%= foundRestaurant._id %>/review/<%= element._id %>/edit" method="GET">
-            <button type="submit" class="btn btn-warning">Edit Review</button>
-        </form>
-        </div>
-    <% }) %>
-<% } else { %>
-  <p>No reviews yet.</p>
-  <form action="/restaurant/<%= foundRestaurant._id %>/review" method="GET">
-    <button type="submit" class="btn btn-warning">Review Restaurant</button>
-</form>
-<% } %>
-
+            <% if (user && user.role === 'admin' || user && user.role === 'reviewer') { %>
+                <form action="/restaurant/<%= foundRestaurant._id %>/review/<%= element._id %>/edit" method="GET">
+                    <button type="submit" class="btn btn-warning">Edit Review</button>
+                </form>
+                
+                <% } %>
+            </div>
+            <% }) %>
+            <% } else { %>
+                <p>No reviews yet.</p>
+                <% if (user && user.role === 'admin') { %>
+                    <form action="/restaurant/<%= foundRestaurant._id %>/review" method="GET">
+                        <button type="submit" class="btn btn-warning">Review Restaurant</button>
+                    </form>
+                    
+                    <% } %>
+                    <% } %>
+                    
+                    <a href="/suggestions" class="btn btn-secondary">Back to All Restaurants</a>
 <br>
+<% if (found) { %>
+ 
+<% } %>
 <form action="/restaurant/<%= foundRestaurant._id %>?_method=DELETE" method="POST">
     <button type="submit" class="btn btn-danger">Delete</button>
 </form>
