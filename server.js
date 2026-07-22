@@ -71,8 +71,8 @@ app.put("/restaurant/:restaurantId", isSignedIn, restaurantCtrl.editRestaurant)
 
 // reviews routers
 app.get("/restaurant/:restaurantId/review", isSignedIn, reviewCtrl.showReviewForm)
-app.put("/restaurant/:restaurantId", isSignedIn, reviewCtrl.createReview)
-app.get('/reviews', reviewCtrl.showReviews)
+app.put("/restaurant/:restaurantId/review", isSignedIn, reviewCtrl.createReview)
+app.get('/reviews', reviewCtrl.showAllReviews)
 
 const startServer = async () => {
     try {

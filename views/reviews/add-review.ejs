@@ -1,7 +1,7 @@
 <%- include("../partials/nav.ejs") %>
 
 
-<form action="/restaurant/<%= foundRestaurant._id %>?_method=PUT" method="POST">
+<form action="/restaurant/<%= foundRestaurant._id %>/review?_method=PUT" method="POST">
     <div>
         
         <h1>Review: <%= foundRestaurant.name %></h1>

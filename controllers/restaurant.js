@@ -1,6 +1,6 @@
 const Restaurant = require("../models/retaurantsList")
 const cloudinary = require('../config/cloudinary')
-
+const Review = require("../models/reviews")
 
 //adding restaurants suggestions
 const showNewRestaurantForm = (req, res) => {
@@ -21,7 +21,7 @@ const creatSuggestion = async(req,res) => {
 }
 
 const showAllSuggestions = async (req, res) =>{
-    let allSuggestions = await Restaurant.find({status: 'suggested'}).populate()
+    let allSuggestions = await Restaurant.find({status: 'reviewed'}).populate()
     res.render('restaurants/show-all-restaurants.ejs', {
         allSuggestions,
         

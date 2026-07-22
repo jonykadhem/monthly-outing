@@ -13,6 +13,7 @@ const showReviewForm = async(req, res) => {
 }
 
 const createReview = async (req,res) => {
+    console.log(req.body)
     
     const reviewData = {}
 
@@ -24,7 +25,9 @@ const createReview = async (req,res) => {
     reviewData.quantity = req.body.quantity
     reviewData.comment = req.body.comment
 
-    await Review.create(reviewData)
+    const createdReview = await Review.create(reviewData)
+
+    console.log(createdReview)
 
     await Restaurant.findByIdAndUpdate(req.params.restaurantId, {
         
@@ -34,10 +37,10 @@ const createReview = async (req,res) => {
     res.redirect('/suggestions')
 }
 
-const showReviews = async(req, res) => {
+const showAllReviews = async(req, res) => {
     let allReviews = await Restaurant.find({status: 'reviewed'}).populate()
 
-    res.render('/reviews/show-reviews.ejs', {
+    res.render('reviews/show-reviews.ejs', {
         allReviews,
     })
 
@@ -46,8 +49,10 @@ const showReviews = async(req, res) => {
 
 
 
+
+
 module.exports = {
     showReviewForm,
     createReview,
-    showReviews,
+    showAllReviews,
 }
